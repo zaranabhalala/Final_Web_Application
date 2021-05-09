@@ -3,7 +3,7 @@
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">Name</th>
+        <th scope="col">Player's Name</th>
         <th scope="col">Team</th>
         <th scope="col">Position</th>
         <th scope="col">Height_inches</th>
@@ -13,9 +13,9 @@
     </tr>
     </thead>
     <tbody>
-    {% for Player in Names %}
+    {% for Player in Players %}
     <tr>
-        <td><a href="view/{{Player.Name}}">{{ Player.Name }}</a></td>
+        <td><a href="view/{{Player.id}}">{{ Player.Name }}</a></td>
         <td>{{ Player.Team }}</td>
         <td>{{ Player.Position }}</td>
         <td>{{ Player.Height_inches }}</td>
