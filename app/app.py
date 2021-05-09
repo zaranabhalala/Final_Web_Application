@@ -5,6 +5,7 @@ from flask import render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 from utilities import sendemail
+import sys
 
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
@@ -34,13 +35,29 @@ def show_index():
     result = cursor.fetchall()
     return render_template('index.html', title='Home', user=user, Players=result)
 
-@app.route('/checklogin/<string:email>', methods=['POST'])
-def form_check_login(email):
+@app.route('/checklogin', methods=['POST'])
+def form_check_login():
+    strEmail = str(request.form.get('email'))
     cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM tblUsers WHERE userEmail=%s', email)
-    request.form.get('pwd')
-    result = cursor.fetchall()
-    return render_template('edit.html', title='Edit Form', player=result[0])
+    cursor.execute('SELECT * FROM tblUsers WHERE userEmail=%s', strEmail)
+    row_count = cursor.rowcount
+    if row_count == 0:
+        print('No rows returned', file=sys.stderr)
+        return render_template('signup.html', title='Signup')
+    else:
+        result = cursor.fetchall()
+
+        if str(result[0]['userPassword']) == str(request.form.get('pswd')):
+
+            user = {'username': str(result[0]['userName'])}
+            cursor = mysql.get_db().cursor()
+            cursor.execute('SELECT * FROM tblPlayersImport')
+            result = cursor.fetchall()
+            return render_template('index.html', title='Home', user=user, players=result)
+
+        else:
+            print('In Else', file=sys.stderr)
+            return render_template('login.html', title='Login Page')
 
 @app.route('/view/<int:player_id>', methods=['GET'])
 def record_view(player_id):
