@@ -2,9 +2,8 @@
 CREATE TABLE IF NOT EXISTS tblUsers(
   id int AUTO_INCREMENT,
   userName VARCHAR(100),
-  userFirstName VARCHAR(100),
-  userLastName VARCHAR(100),
-  userEmail VARCHAR(100),
+  userEmail VARCHAR(100)
+  userPassword VARCHAR(100),
   PRIMARY KEY (id)
 );
 
@@ -16,6 +15,14 @@ CREATE TABLE IF NOT EXISTS tblTempUsers(
   userHash VARCHAR(100),
   PRIMARY KEY (id)
 );
+
+INSERT INTO tblUsers(userName, userEmail, userPassword) VALUES
+    ('username1', 'username1@gmail.com', 'password1'),
+    ('username2', 'username2@gmail.com', 'password2'),
+    ('username3', 'username3@gmail.com', 'password3'),
+    ('username4', 'username4@gmail.com', 'password4'),
+    ('username5', 'username5@gmail.com', 'password5');
+
 
 CREATE DATABASE mlbPlayers;
 use mlbPlayers;
