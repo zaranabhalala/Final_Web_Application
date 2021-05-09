@@ -1,47 +1,6 @@
 # Project Description
-This project contains information about flask forms introduction.
+### Project features
 
-# Data table in Pycharm
-![Data table in pycharm](Screenshots/Database.png)
+1.  Create a login and registration process that includes email verification.  You can use a service like SendGrid to send email and you should look for a Flask Plugin to help.
 
-# Browser displaying homepage with data
-![Homepage](Screenshots/Browser.png)
-
-# Browser displaying data record as a view of one record
-![One_record](Screenshots/One_record.png)
-
-# New record added to home page
-![New_record](Screenshots/Add_record.png)
-
-# Updated record added to homepage
-![Updated_record](Screenshots/Update_record.png)
-
-# Deleted record added to homepage
-![Deleted_record](Screenshots/Delete_record.png)
-
-# Web Application Part / Final - Individual Project Description
-In this project I have created a REST API and use Postman to test the GET, POST, PUT, and DELETE request methods.
-
-# Postman listing all records
-![List_all_record](Screenshots/Postman_all_record.png)
-
-# Postman showing one record with a get request
-![List_one_record](Screenshots/Postman_one_record.png)
-
-# Postman creating a record by showing the post request
-![Post_request](Screenshots/Postman_Post_request.png)
-
-# Postman post request result
-![Post_request_result](Screenshots/Post_request_result.png)
-
-# Postman edit a record by showing the put request
-![Put_request](Screenshots/Put_request.png)
-
-# Postman put request result
-![Put_request_result](Screenshots/Put_request_result.png)
-
-# Postman delete a record by showing the delete request
-![Delete_request](Screenshots/Delete_request.png)
-
-# Postman delete request result
-![Delete_request_result](Screenshots/Delete_request_result.png)
+2.  Create a calendar display and retrieve data out of Google Calendar.   Allow someone to add an even to their Google Calendar and display it on the page.  You can use the HTML full calendar plugin here (Links to an external site.) and you can probably make an iCal Feed from your Google calendar to feed into it, but you will need to cache the data locally in the database and update the data periodically between each request is made.  For example, if the calendar data has not been updated in 5 minutes, make a request to retrieve the data and update the database and then display that data in the fullCalendar page.
