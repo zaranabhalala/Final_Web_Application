@@ -4,6 +4,7 @@ from flask import Flask, request, Response, redirect
 from flask import render_template
 from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
+from utilities import sendemail
 
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
@@ -20,9 +21,14 @@ mysql.init_app(app)
 def index():
     return render_template('login.html', title='Login Page')
 
+@app.route('/signup', methods=['GET'])
+def signup():
+    return render_template('signup.html', title='SignUp Page')
+
 @app.route('/index', methods=['GET'])
 def show_index():
     user = {'username': 'Zarana and Jay'}
+    sendemail.sendemail('zvb2@njit.edu')
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM tblPlayersImport')
     result = cursor.fetchall()
