@@ -18,12 +18,15 @@ mysql.init_app(app)
 
 @app.route('/', methods=['GET'])
 def index():
-    user = {'username': 'MLB Players'}
+    return render_template('login.html', title='Login Page')
+
+@app.route('/index', methods=['GET'])
+def show_index():
+    user = {'username': 'Zarana and Jay'}
     cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM mlb_players')
+    cursor.execute('SELECT * FROM tblPlayersImport')
     result = cursor.fetchall()
     return render_template('index.html', title='Home', user=user, Players=result)
-
 
 @app.route('/view/<int:player_id>', methods=['GET'])
 def record_view(player_id):
