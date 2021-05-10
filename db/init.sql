@@ -1,18 +1,19 @@
 CREATE DATABASE mlbPlayers;
 use mlbPlayers;
 
-/* CREATE TABLE */
-CREATE TABLE IF NOT EXISTS tblUsers(
-  id int AUTO_INCREMENT,
-  userName VARCHAR(100),
-  userEmail VARCHAR(100)
-  userPassword VARCHAR(100),
-  userHash VARCHAR(100),
-  PRIMARY KEY (id)
+CREATE TABLE IF NOT EXISTS mlb_players (
+    `id` INT AUTO_INCREMENT,
+    `Name` VARCHAR(19) CHARACTER SET utf8,
+    `Team` VARCHAR(6) CHARACTER SET utf8,
+    `Position` VARCHAR(20) CHARACTER SET utf8,
+    `Height_inches` INT,
+    `Weight_lbs` INT,
+    `Age` NUMERIC(4, 2),
+    PRIMARY KEY (`id`)
 );
 
 /* CREATE TABLE */
-CREATE TABLE IF NOT EXISTS tblTempUsers(
+CREATE TABLE IF NOT EXISTS tblUsers(
   id int AUTO_INCREMENT,
   userName VARCHAR(100),
   userEmail VARCHAR(100),
@@ -41,19 +42,9 @@ INSERT INTO tblErrors(errCode, errName, errMessage, errNextPage) VALUES
     ('405', 'USER_EXISTS','User name already exists.', 'login'),
     ('406', 'EMAIL_NOT_VERIFIED','Please verify your email before trying to login.', 'login'),
     ('407', 'INVALID_LOGIN','Please check your email id/password and try again.', 'login'),
-    ('200', 'USER_CREATED','User created successfully. Please check your email for login instructions.', 'login');
+    ('200', 'USER_CREATED','User created successfully. Please check your email for login instructions.', 'login'),
+    ('201', 'EMAIL_VERIFIED','Email verified successfully. Please proceed to login.', 'login');
 
-
-CREATE TABLE IF NOT EXISTS mlb_players (
-    `id` INT AUTO_INCREMENT,
-    `Name` VARCHAR(19) CHARACTER SET utf8,
-    `Team` VARCHAR(6) CHARACTER SET utf8,
-    `Position` VARCHAR(20) CHARACTER SET utf8,
-    `Height_inches` INT,
-    `Weight_lbs` INT,
-    `Age` NUMERIC(4, 2),
-    PRIMARY KEY (`id`)
-);
 INSERT INTO mlb_players (Name, Team, Position, Height_inches, Weight_lbs, Age) VALUES
     ('Adam Donachie',' "BAL"',' "Catcher"',74,180,22.99),
     ('Paul Bako',' "BAL"',' "Catcher"',74,215,34.69),

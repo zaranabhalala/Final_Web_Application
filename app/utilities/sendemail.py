@@ -11,25 +11,29 @@ def absolute_path(filepath):
     return relative.absolute()
 
 
-def sendemail(to):
+def sendemail(to, strHash):
     sender_email = "jmnjit3@gmail.com"
-    receiver_email = "zvb2@njit.edu"
+    receiver_email = to
     password = 'Qwerty123$'
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "multipart test"
+    message["Subject"] = "Verify email for MLB Player's database access"
     message["From"] = sender_email
     message["To"] = receiver_email
 
     text = """\
     Hi,
-    This message is send from MLB Players Team"""
+    You have Sign Up for the MLB Player's database.
+    Please click on link to verify."""
 
     html = """\
     <html>
       <body>
         <p>Hi,<br>
-           This message is send from MLB Players Team<br>
+        You have Sign Up for the MLB Player's database.<br><br>
+        Please click on link to verify.<br><br>
+           <a href="http://localhost:5000/validateLogin/""""" + strHash + """">Click Here</a> 
+           to validate your email address.
         </p>
       </body>
     </html>
