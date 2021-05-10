@@ -38,13 +38,26 @@ def show_index():
 @app.route('/logins/new', methods=['POST'])
 def add_login():
     cursor = mysql.get_db().cursor()
-    inputData = (request.form.get('userName'), request.form.get('userEmail'), request.form.get('userPassword'),
-                 request.form.get('userHash'))
-    sql_insert_query = """INSERT INTO tblTempUsers (userName,userEmail,userPassword,userHash) 
-    VALUES (%s, %s,%s, %s) """
-    cursor.execute(sql_insert_query, inputData)
-    mysql.get_db().commit()
-    return redirect("/", code=302)
+    strEmail = str(request.form.get('email'))
+
+    cursor.execute('SELECT * FROM tblUsers WHERE userEmail=%s', strEmail)
+
+    row_count = cursor.rowcount
+    if row_count == 0:
+        print('No rows returned', file=sys.stderr)
+        inputData = (request.form.get('name'), request.form.get('email'), request.form.get('pswd'),
+                     '1234')
+        sql_insert_query = """INSERT INTO tblUsers (userName,userEmail,userPassword,userHash) 
+                VALUES (%s, %s,%s, %s) """
+        cursor.execute(sql_insert_query, inputData)
+        mysql.get_db().commit()
+        sendemail.sendemail(request.form.get('email'))
+        return render_template('login.html', title='Login Page')
+    else:
+        print('Login already exists', file=sys.stderr)
+        cursor.execute('SELECT * FROM tblErrors where errName=%s', 'USER_EXISTS')
+        result = cursor.fetchall()
+        return render_template('notify.html', title='Notify', player=result[0])
 
 @app.route('/checklogin', methods=['POST'])
 def form_check_login():
@@ -58,6 +71,12 @@ def form_check_login():
     else:
         result = cursor.fetchall()
 
+        if result[0]['userHash'] != '':
+            print('userHash ' + result[0]['userHash'], file=sys.stderr)
+            cursor.execute('SELECT * FROM tblErrors where errName=%s', 'EMAIL_NOT_VERIFIED')
+            result = cursor.fetchall()
+            return render_template('notify.html', title='Notify', player=result[0])
+
         if str(result[0]['userPassword']) == str(request.form.get('pswd')):
 
             user = {'username': str(result[0]['userName'])}
@@ -67,8 +86,10 @@ def form_check_login():
             return render_template('index.html', title='Home', user=user, players=result)
 
         else:
-            print('In Else', file=sys.stderr)
-            return render_template('login.html', title='Login Page')
+            print('Invalid Id/PWD', file=sys.stderr)
+            cursor.execute('SELECT * FROM tblErrors where errName=%s', 'INVALID_LOGIN')
+            result = cursor.fetchall()
+            return render_template('notify.html', title='Notify', player=result[0])
 
 @app.route('/view/<int:player_id>', methods=['GET'])
 def record_view(player_id):
