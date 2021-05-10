@@ -35,7 +35,6 @@ def signup():
 @app.route('/index', methods=['GET'])
 def show_index():
     user = {'username': 'Zarana and Jay'}
-    sendemail.sendemail('zvb2@njit.edu')
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM mlb_players')
     result = cursor.fetchall()
