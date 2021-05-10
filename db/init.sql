@@ -11,16 +11,6 @@ CREATE TABLE IF NOT EXISTS tblUsers(
   PRIMARY KEY (id)
 );
 
-/* CREATE TABLE */
-CREATE TABLE IF NOT EXISTS tblTempUsers(
-  id int AUTO_INCREMENT,
-  userName VARCHAR(100),
-  userEmail VARCHAR(100),
-  userPassword VARCHAR(100),
-  userHash VARCHAR(100),
-  PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS tblErrors(
   errCode int AUTO_INCREMENT,
   errName VARCHAR(100),
@@ -41,7 +31,8 @@ INSERT INTO tblErrors(errCode, errName, errMessage, errNextPage) VALUES
     ('405', 'USER_EXISTS','User name already exists.', 'login'),
     ('406', 'EMAIL_NOT_VERIFIED','Please verify your email before trying to login.', 'login'),
     ('407', 'INVALID_LOGIN','Please check your email id/password and try again.', 'login'),
-    ('200', 'USER_CREATED','User created successfully. Please check your email for login instructions.', 'login');
+    ('200', 'USER_CREATED','User created successfully. Please check your email for login instructions.', 'login'),
+    ('201', 'EMAIL_VERIFIED','Email verified successfully. Please proceed to login.', 'login');
 
 
 CREATE TABLE IF NOT EXISTS mlb_players (

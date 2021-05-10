@@ -6,6 +6,8 @@ from flaskext.mysql import MySQL
 from pymysql.cursors import DictCursor
 from utilities import sendemail
 import sys
+from datetime import datetime
+import random
 
 app = Flask(__name__)
 mysql = MySQL(cursorclass=DictCursor)
@@ -44,14 +46,17 @@ def add_login():
 
     row_count = cursor.rowcount
     if row_count == 0:
+        strPassword = request.form.get('pswd')
+        strName = request.form.get('name')
         print('No rows returned', file=sys.stderr)
-        inputData = (request.form.get('name'), request.form.get('email'), request.form.get('pswd'),
-                     '1234')
+        random.seed(datetime.now())
+        strHash = str(random.randint(123234, 1232315324))
+        inputData = (strName, strEmail, strPassword, strHash)
         sql_insert_query = """INSERT INTO tblUsers (userName,userEmail,userPassword,userHash) 
                 VALUES (%s, %s,%s, %s) """
         cursor.execute(sql_insert_query, inputData)
         mysql.get_db().commit()
-        sendemail.sendemail(request.form.get('email'))
+        sendemail.sendemail(strEmail, strHash)
         return render_template('login.html', title='Login Page')
     else:
         print('Login already exists', file=sys.stderr)
@@ -90,6 +95,17 @@ def form_check_login():
             cursor.execute('SELECT * FROM tblErrors where errName=%s', 'INVALID_LOGIN')
             result = cursor.fetchall()
             return render_template('notify.html', title='Notify', player=result[0])
+
+@app.route('/validateLogin/<int:intHash>', methods=['GET', 'POST'])
+def validateLogin(intHash):
+        cursor = mysql.get_db().cursor()
+        inputData = str(intHash)
+        sql_update_query = """UPDATE tblUsers t SET t.userHash = '' WHERE t.userHash = %s """
+        cursor.execute(sql_update_query, inputData)
+        mysql.get_db().commit()
+        cursor.execute('SELECT * FROM tblErrors where errName=%s', 'EMAIL_VERIFIED')
+        result = cursor.fetchall()
+        return render_template('notify.html', title='Notify', player=result[0])
 
 @app.route('/view/<int:player_id>', methods=['GET'])
 def record_view(player_id):
