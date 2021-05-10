@@ -1,31 +1,48 @@
+CREATE DATABASE mlbPlayers;
+use mlbPlayers;
+
 /* CREATE TABLE */
 CREATE TABLE IF NOT EXISTS tblUsers(
   id int AUTO_INCREMENT,
   userName VARCHAR(100),
   userEmail VARCHAR(100)
   userPassword VARCHAR(100),
+  userHash VARCHAR(100),
   PRIMARY KEY (id)
 );
 
 /* CREATE TABLE */
 CREATE TABLE IF NOT EXISTS tblTempUsers(
   id int AUTO_INCREMENT,
+  userName VARCHAR(100),
   userEmail VARCHAR(100),
   userPassword VARCHAR(100),
   userHash VARCHAR(100),
   PRIMARY KEY (id)
 );
 
-INSERT INTO tblUsers(userName, userEmail, userPassword) VALUES
-    ('username1', 'username1@gmail.com', 'password1'),
-    ('username2', 'username2@gmail.com', 'password2'),
-    ('username3', 'username3@gmail.com', 'password3'),
-    ('username4', 'username4@gmail.com', 'password4'),
-    ('username5', 'username5@gmail.com', 'password5');
+CREATE TABLE IF NOT EXISTS tblErrors(
+  errCode int AUTO_INCREMENT,
+  errName VARCHAR(100),
+  errMessage VARCHAR(100),
+  errNextPage VARCHAR(100),
+  PRIMARY KEY (errCode)
+);
 
+INSERT INTO tblUsers(userName, userEmail, userPassword, userHash) VALUES
+    ('username1', 'username1@gmail.com', 'password1',''),
+    ('username2', 'username2@gmail.com', 'password2',''),
+    ('username3', 'username3@gmail.com', 'password3',''),
+    ('username4', 'username4@gmail.com', 'password4',''),
+    ('username5', 'username5@gmail.com', 'password5','');
 
-CREATE DATABASE mlbPlayers;
-use mlbPlayers;
+INSERT INTO tblErrors(errCode, errName, errMessage, errNextPage) VALUES
+    ('404', 'USER_NOT_FOUND','User name not found', 'signup'),
+    ('405', 'USER_EXISTS','User name already exists.', 'login'),
+    ('406', 'EMAIL_NOT_VERIFIED','Please verify your email before trying to login.', 'login'),
+    ('407', 'INVALID_LOGIN','Please check your email id/password and try again.', 'login'),
+    ('200', 'USER_CREATED','User created successfully. Please check your email for login instructions.', 'login');
+
 
 CREATE TABLE IF NOT EXISTS mlb_players (
     `id` INT AUTO_INCREMENT,
