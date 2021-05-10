@@ -37,9 +37,9 @@ def show_index():
     user = {'username': 'Zarana and Jay'}
     sendemail.sendemail('zvb2@njit.edu')
     cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM tblPlayersImport')
+    cursor.execute('SELECT * FROM mlb_players')
     result = cursor.fetchall()
-    return render_template('index.html', title='Home', user=user, Players=result)
+    return render_template('index.html', title='Home', user=user, players=result)
 
 @app.route('/logins/new', methods=['POST'])
 def add_login():
@@ -92,7 +92,7 @@ def form_check_login():
 
             user = {'username': str(result[0]['userName'])}
             cursor = mysql.get_db().cursor()
-            cursor.execute('SELECT * FROM tblPlayersImport')
+            cursor.execute('SELECT * FROM mlb_players')
             result = cursor.fetchall()
             return render_template('index.html', title='Home', user=user, players=result)
 
@@ -118,7 +118,7 @@ def record_view(player_id):
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM mlb_players WHERE id =%s', player_id)
     result = cursor.fetchall()
-    return render_template('view.html', title='View Form', Player=result[0])
+    return render_template('view.html', title='View Form', player=result[0])
 
 
 @app.route('/edit/<int:player_id>', methods=['GET'])
@@ -126,7 +126,7 @@ def form_edit_get(player_id):
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM mlb_players WHERE id =%s', player_id)
     result = cursor.fetchall()
-    return render_template('edit.html', title='Edit Form', Player=result[0])
+    return render_template('edit.html', title='Edit Form', player=result[0])
 
 
 @app.route('/edit/<int:player_id>', methods=['POST'])
