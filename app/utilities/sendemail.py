@@ -6,7 +6,6 @@ from pathlib import Path
 
 
 def absolute_path(filepath):
-    password = 'Qwerty123$'
     relative = Path(filepath)
     return relative.absolute()
 
@@ -24,22 +23,20 @@ def sendemail(to, strHash):
     text = """\
     Hi,
     You have Sign Up for the MLB Player's database.
-    Please click on link to verify."""
+    Please click on link to verify email."""
 
     html = """\
     <html>
       <body>
         <p>Hi,<br>
-        You have Sign Up for the MLB Player's database.<br><br>
-        Please click on link to verify.<br><br>
-           <a href="http://localhost:5000/validateLogin/""""" + strHash + """">Click Here</a> 
+           You have Sign Up for the MLB Player's database.<br><br>
+           <a href="http://0.0.0.0:5000/validateLogin/""""" + strHash + """">Click Here</a> 
            to validate your email address.
         </p>
       </body>
     </html>
     """
 
-    # Turn these into plain/html MIMEText objects
     part1 = MIMEText(text, "plain")
     part2 = MIMEText(html, "html")
 
