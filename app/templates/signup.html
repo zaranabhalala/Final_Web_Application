@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Mlb Player's data</title>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <script>
-
         function checkPassword(form) {
             password1 = form.pswd.value.trim();
             password2 = form.pswd2.value.trim();
@@ -39,38 +39,53 @@
         }
     </script>
 </head>
+
 <body>
-
-<div class="container">
-    <p></p>
-    <br><br>
-    <h2>Signup for MLB Players Data</h2>
-    <form action="/logins/new" onsubmit="return checkPassword(this)" method="post">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+<div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+    <div class="card card0 border-0">
+        <div class="row d-flex">
+            <div class="col-lg-6">
+                <div class="card1 pb-5">
+                    <div class="row"></div>
+                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line"><img
+                            src="https://img.mlbstatic.com/mlb-images/image/private/t_16x9/t_w1536/mlb/lsrjcjv2rigtogi9mnko.jpg" class="image"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card2 card border-0 px-4 py-5">
+                    <div class="row mb-4 px-3">
+                        <h2 class="mb-0 mr-4 mt-2">SignUp to View MLB Players Data</h2>
+                    </div>
+                    <form action="/logins/new" onsubmit="return checkPassword(this)" method="post">
+                        <div class="row px-3"><label class="mb-1">
+                            <h6 class="mb-0 text-sm">Name:</h6>
+                        </label> <input class="mb-4" type="text" name="name"
+                                        placeholder="Enter your name"></div>
+                        <div class="row px-3"><label class="mb-1">
+                            <h6 class="mb-0 text-sm">Email:</h6>
+                        </label> <input type="email" name="email" placeholder="Enter your email address"></div>
+                        <div class="row px-3"><label class="mb-1">
+                            <h6 class="mb-0 text-sm">Password:</h6>
+                        </label> <input class="mb-4" type="password" name="pswd"
+                                        placeholder="Enter password"></div>
+                        <div class="row px-3"><label class="mb-1">
+                            <h6 class="mb-0 text-sm">Re-enter Password:</h6>
+                        </label> <input type="password" name="pswd2" placeholder="Enter your password again" oninput="check(this)"></div>
+                        <div class="row mb-3 px-3">
+                            <button type="submit" class="btn btn-blue text-center">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        <div class="bg-blue py-4">
+            <div class="row px-3"><small class="ml-4 ml-sm-5 mb-2">Designed by Zarana Bhalala and Jay Sorathiya</small>
+                <div class="social-contact ml-4 ml-sm-auto"><span class="fa fa-facebook mr-4 text-sm"></span> <span
+                        class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span>
+                    <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span></div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-        </div>
-        <div class="form-group">
-            <label for="pwd">Reenter Password:</label>
-            <input type="password" class="form-control" id="pwd2" placeholder="Enter password again" name="pswd2"
-                   oninput="check(this)">
-        </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" name="remember"> Remember me
-            </label>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
 </div>
 
 </body>
