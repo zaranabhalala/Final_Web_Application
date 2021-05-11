@@ -8,11 +8,11 @@
 1.  Created a login and registration process that includes email verification.(Completed by Zarana Bhalala)
 * Login Process - Log into your account by entering your email address and password.
 * Registration Process - Create new account by clicking "Register" button and  submitting your account information.
-* Upon a register, user will receive a link to verify their login. Once the login is verified, the user will be able to login to view player's database.
+* Upon a register, user will receive an Email with attached link to verify their login. Once the login is verified, the user will be able to login to view player's database.
 
 # Installation instructions
 ### Prerequisites:
-* Port 5000 and 3200 are free in system.
+* Port 5000 and 3200 are open to use in system.
 * Docker is installed and running.
 
 ### Steps:
