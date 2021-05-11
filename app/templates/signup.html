@@ -9,35 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    <script>
-        function checkPassword(form) {
-            password1 = form.pswd.value.trim();
-            password2 = form.pswd2.value.trim();
-
-            // If name is blank
-            if (form.name.value.trim() == '')
-                alert("Please enter your name.");
-            else if (form.email.value.trim() == '')
-                alert("Please enter your email.");
-
-            // If password not entered
-            else if (password1 == '')
-                alert("Please enter Password");
-
-            // If confirm password not entered
-            else if (password2 == '')
-                alert("Please enter confirm password");
-
-            // If Not same return False.
-            else if (password1 != password2)
-                alert("\nPassword did not match: Please try again...")
-            // If same return True.
-            else {
-                return true;
-            }
-            return false;
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
 </head>
 
 <body>
