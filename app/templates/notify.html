@@ -6,8 +6,8 @@
         <h5 class="card-title">  {{ player.errCode }} - {{ player.errMessage }}</h5>
 
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Error Code: {{ player.errCode }}</li>
-            <li class="list-group-item">Error Message: {{ player.errMessage }}</li>
+            <li class="list-group-item">Status Code: {{ player.errCode }}</li>
+            <li class="list-group-item">Message: {{ player.errMessage }}</li>
         </ul>
     </div>
     <form action="/{{ player.errNextPage }}" method="get">
