@@ -1,6 +1,31 @@
-# Project Description
-### Project features
+# Final Web Application
 
-1.  Create a login and registration process that includes email verification.  You can use a service like SendGrid to send email and you should look for a Flask Plugin to help.
+## Team members
+1. Zarana Bhalala
+2. Jay Sorathiya
 
-2.  Create a calendar display and retrieve data out of Google Calendar.   Allow someone to add an even to their Google Calendar and display it on the page.  You can use the HTML full calendar plugin here (Links to an external site.) and you can probably make an iCal Feed from your Google calendar to feed into it, but you will need to cache the data locally in the database and update the data periodically between each request is made.  For example, if the calendar data has not been updated in 5 minutes, make a request to retrieve the data and update the database and then display that data in the fullCalendar page.
+## Project feature 1
+### Zarana Bhalala
+1.  Created a login and registration process that includes email verification.
+* Login Process - Log into your account by entering your email address and password.
+* Registration Process - Create new account by clicking "Register" button and  submitting your account information.
+* Upon a register, user will receive an Email with attached link to verify their login. Once the login is verified, the user will be able to login to view player's database.
+* To view the feature working step by step [Click Here](Final%20Web%20Application.pdf). 
+
+# Installation instructions
+### Prerequisites:
+* Port 5000 and 3200 are open to use in system.
+* Docker is installed and running.
+
+### Steps:
+* Clone the repository -
+`git clone https://github.com/zaranabhalala/Final_Web_Application`
+  
+* Go to the Final_Web_Application folder - 
+`cd Final_Web_Application`
+  
+* Build and run the code - 
+`docker-compose up`
+  
+* It will start and run with MYSQL and Flask App and then open a browser and paste below URL - 
+`http://localhost:5000/`
