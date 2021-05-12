@@ -9,6 +9,7 @@
 * Login Process - Log into your account by entering your email address and password.
 * Registration Process - Create new account by clicking "Register" button and  submitting your account information.
 * Upon a register, user will receive an Email with attached link to verify their login. Once the login is verified, the user will be able to login to view player's database.
+* To view the feature working step by step [Click Here](Final%20Web%20Application.pdf). 
 
 # Installation instructions
 ### Prerequisites:
