@@ -18,7 +18,7 @@
 * Click on Player Statistics (the Green button on top).
 * Upon clicking, the page will display the statistics of Players according to their positions.
 * As long as the new data is added, the statistics will change.
-* To view this feature working step by step [Click Here](). 
+* To view this feature working step by step [Click Here](Final_Web_Application_Feature_jay.pdf). 
 
 # Installation instructions
 ### Prerequisites:
