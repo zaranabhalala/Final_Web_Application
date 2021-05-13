@@ -24,6 +24,24 @@ mysql.init_app(app)
 def index():
     return render_template('login.html', title='Login Page')
 
+@app.route('/statistics', methods=['GET'])
+def charts_view():
+    legend = 'Player Count in Each Position'
+    labels = []
+    cursor = mysql.get_db().cursor()
+    cursor.execute(
+        'SELECT position FROM mlb_players GROUP BY position')
+    for temp in cursor.fetchall():
+        labels.append(list(temp.values())[0])
+    values = []
+    cursor.execute('SELECT COUNT(*) FROM mlb_players GROUP BY position ')
+    for temp in cursor.fetchall():
+        values.append(list(temp.values())[0])
+    result = cursor.fetchall()
+    return render_template('flowchart.html', title='Home', player=result, player_labels=labels,
+                           player_legend=legend,
+                           player_values=values)
+
 @app.route('/login', methods=['GET'])
 def login():
     return render_template('login.html', title='Login Page')
